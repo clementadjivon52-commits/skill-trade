@@ -1,0 +1,128 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum OfferCategory {
+  tech
+  time
+}
+
+model User {
+  id           String            @id
+  name         String
+  photo        String
+  role         String
+  location     String
+  bio          String
+  whatsapp     String
+  trustBadge   String
+  availability String
+  heroOffer    String
+  wallet       Wallet?
+  skills       UserSkill[]
+  timeServices UserTimeService[]
+  portfolio    PortfolioItem[]
+  missions     Mission[]
+  proposals    MatchProposal[]
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+}
+
+model Wallet {
+  id         String              @id
+  ownerLabel String
+  balance    Int
+  lastTopUp  String
+  userId     String?             @unique
+  user       User?               @relation(fields: [userId], references: [id], onDelete: SetNull)
+  createdAt  DateTime            @default(now())
+  updatedAt  DateTime            @updatedAt
+  packages   WalletRechargePack[]
+}
+
+model WalletRechargePack {
+  id        String   @id
+  label     String
+  amount    String
+  href      String
+  walletId  String
+  wallet    Wallet   @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Skill {
+  id        Int         @id @default(autoincrement())
+  name      String      @unique
+  users     UserSkill[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model UserSkill {
+  userId    String
+  skillId   Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skill     Skill    @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@id([userId, skillId])
+}
+
+model TimeService {
+  id        Int               @id @default(autoincrement())
+  name      String            @unique
+  users     UserTimeService[]
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+}
+
+model UserTimeService {
+  userId        String
+  timeServiceId Int
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  timeService   TimeService @relation(fields: [timeServiceId], references: [id], onDelete: Cascade)
+  createdAt     DateTime    @default(now())
+
+  @@id([userId, timeServiceId])
+}
+
+model PortfolioItem {
+  id        String   @id
+  title     String
+  image     String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Mission {
+  id          String        @id
+  title       String
+  description String
+  category    OfferCategory
+  image       String
+  reward      String
+  ownerId     String
+  owner       User          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  proposals   MatchProposal[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model MatchProposal {
+  id         String    @id
+  partnerId  String
+  missionId  String?
+  status     String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  partner    User      @relation(fields: [partnerId], references: [id], onDelete: Cascade)
+  mission    Mission?  @relation(fields: [missionId], references: [id], onDelete: SetNull)
+}

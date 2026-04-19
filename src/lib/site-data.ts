@@ -49,7 +49,7 @@ function mapMission(mission: {
   id: string;
   title: string;
   description: string;
-  category: "tech" | "time";
+  category: string;
   image: string;
   reward: string;
   owner: {
@@ -111,7 +111,7 @@ export async function getMarketplaceOffers(type = "all") {
   }
 
   const missions = await prisma.mission.findMany({
-    where: type === "all" ? undefined : { category: type as "tech" | "time" },
+    where: type === "all" ? undefined : { category: type },
     include: {
       owner: {
         include: userInclude,

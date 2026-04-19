@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
+import { getUser } from "@/lib/auth";
+import AuthButtons from "@/components/AuthButtons";
 
 export const metadata: Metadata = {
   title: "SKILL-TRADE",
   description: "Plateforme de troc de competences et services pour les jeunes de Lome.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = await getUser();
   return (
     <html lang="fr" className="h-full antialiased">
       <body className="min-h-full">
@@ -48,6 +51,8 @@ export default function RootLayout({
                   </Link>
                 ))}
               </nav>
+
+              <AuthButtons isLoggedIn={!!user} />
             </div>
           </header>
 

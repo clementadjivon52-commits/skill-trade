@@ -1,4 +1,4 @@
-import { OfferCategory, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { getAllSeedData } from "../src/lib/site-data";
 
 const prisma = new PrismaClient();
@@ -40,6 +40,8 @@ async function main() {
     await prisma.user.create({
       data: {
         id: user.id,
+        email: `${user.id}@skill-trade.com`,
+        password: "seeded-password",
         name: user.name,
         photo: user.photo,
         role: user.role,
@@ -108,8 +110,7 @@ async function main() {
       id: mission.id,
       title: mission.title,
       description: mission.description,
-      category:
-        mission.category === "tech" ? OfferCategory.tech : OfferCategory.time,
+      category: mission.category,
       image: mission.image,
       reward: mission.reward,
       ownerId: mission.ownerId,

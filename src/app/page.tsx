@@ -30,7 +30,7 @@ export default async function Home() {
           </p>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <Link
-              href="/marketplace"
+              href="/auth/register"
               className="rounded-full bg-gradient-to-r from-violet-600 to-cyan-400 px-6 py-3 text-center font-semibold text-white shadow-[0_12px_40px_rgba(124,58,237,0.35)] hover:scale-[1.02]"
             >
               Commencer gratuitement

@@ -47,7 +47,7 @@ export default function AuthButtons({ isLoggedIn }: AuthButtonsProps) {
         href="/auth/register"
         className="rounded-full bg-gradient-to-r from-violet-600 to-cyan-400 px-4 py-2 text-sm font-semibold text-white shadow-[0_4px_14px_rgba(124,58,237,0.35)] hover:scale-[1.02]"
       >
-        S'inscrire
+        S&apos;inscrire
       </Link>
     </div>
   );

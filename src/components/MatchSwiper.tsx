@@ -42,15 +42,12 @@ export default function MatchSwiper({
   
   // Redirection/Success animations
   const [isSwipingOut, setIsSwipingOut] = useState(false);
+  const [swipeDirection, setSwipeDirection] = useState<"left" | "right" | null>(null);
   const [confettiActive, setConfettiActive] = useState(false);
 
   // Stop drag event references
   const cardContainerRef = useRef<HTMLDivElement>(null);
-  const endDragRef = useRef(endDrag);
-
-  useEffect(() => {
-    endDragRef.current = endDrag;
-  });
+  const endDragRef = useRef<(() => void) | null>(null);
 
   // If index reaches end of queue, reset or show empty state
   const isQueueEmpty = index >= queue.length;
@@ -93,6 +90,9 @@ export default function MatchSwiper({
       setDragOffset({ x: 0, y: 0 });
     }
   };
+
+  // Keep ref in sync with latest endDrag closure
+  endDragRef.current = endDrag;
 
   const triggerSwipe = (dir: "left" | "right") => {
     if (isQueueEmpty || !currentCandidate) return;
@@ -145,7 +145,7 @@ export default function MatchSwiper({
   // Document level mouseup escape
   useEffect(() => {
     const handleGlobalMouseUp = () => {
-      if (isDragging) endDragRef.current();
+      if (isDragging) endDragRef.current?.();
     };
     window.addEventListener("mouseup", handleGlobalMouseUp);
     return () => window.removeEventListener("mouseup", handleGlobalMouseUp);

@@ -28,7 +28,7 @@ type Offer = {
   category: string;
   image: string;
   reward: string;
-  owner: User;
+  owner?: User;
   typeLabel: string;
 };
 

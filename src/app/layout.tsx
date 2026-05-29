@@ -71,6 +71,8 @@ export default async function RootLayout({
                   <AuthButtons
                     isLoggedIn={!!user}
                     isAdmin={user?.isAdmin ?? false}
+                    userName={user?.name ?? undefined}
+                    userPhoto={user?.photo ?? undefined}
                   />
                 </div>
               </header>

@@ -1,0 +1,85 @@
+{
+  "nav": {
+    "marketplace": "Marketplace",
+    "match": "Match",
+    "wallet": "Wallet",
+    "dashboard": "Tableau de bord",
+    "settings": "Paramètres",
+    "admin": "Admin",
+    "logout": "Déconnexion",
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "createService": "Créer un service"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "language": "Langue",
+    "theme": "Thème",
+    "dark": "Sombre",
+    "light": "Clair",
+    "profile": "Profil",
+    "plan": "Mon plan",
+    "save": "Enregistrer",
+    "saved": "Enregistré !",
+    "name": "Nom complet",
+    "bio": "Biographie",
+    "whatsapp": "WhatsApp",
+    "photo": "Photo de profil (URL)"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "welcome": "Bienvenue",
+    "services": "Mes services",
+    "createService": "Créer un service",
+    "upgradePrompt": "Passez au plan Pro ou Business pour créer plus de services.",
+    "noServices": "Vous n'avez pas encore de services.",
+    "plan": "Mon plan actuel",
+    "tokens": "Skill-Tokens",
+    "cvSection": "Mon CV",
+    "editCv": "Modifier mon CV",
+    "matches": "Matchs",
+    "statusActive": "Actif",
+    "statusPaused": "En pause"
+  },
+  "plans": {
+    "title": "Nos offres",
+    "subtitle": "Choisissez le plan qui vous correspond",
+    "free": "Gratuit",
+    "pro": "Pro",
+    "business": "Business",
+    "month": "/mois",
+    "current": "Plan actuel",
+    "subscribe": "Souscrire",
+    "features": {
+      "free": ["1 service", "Dashboard personnel", "CV visible", "Accès marketplace", "Matchmaking"],
+      "pro": ["Jusqu'à 10 services", "Badge Pro prioritaire", "Services payants", "Support prioritaire", "Tout le plan Free"],
+      "business": ["Services illimités", "Analytics avancés", "Mise en avant premium", "Support dédié", "Tout le plan Pro"]
+    }
+  },
+  "cv": {
+    "title": "Mon CV",
+    "upload": "Importer un PDF",
+    "download": "Télécharger",
+    "fullName": "Nom complet",
+    "jobTitle": "Titre / Poste",
+    "summary": "Résumé professionnel",
+    "phone": "Téléphone",
+    "email": "Email",
+    "address": "Adresse",
+    "skills": "Compétences",
+    "experience": "Expériences",
+    "education": "Formation",
+    "save": "Enregistrer",
+    "saved": "Enregistré !"
+  },
+  "admin": {
+    "title": "Espace Admin",
+    "totalUsers": "Utilisateurs",
+    "totalServices": "Services",
+    "totalSubscriptions": "Abonnements actifs",
+    "totalRevenue": "Revenus (FCFA)",
+    "recentUsers": "Utilisateurs récents",
+    "recentServices": "Services récents",
+    "planBreakdown": "Répartition des plans"
+  }
+}

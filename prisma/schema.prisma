@@ -8,26 +8,88 @@ datasource db {
 }
 
 model User {
-  id           String            @id @default(cuid())
-  email        String            @unique
-  password     String
-  name         String
-  photo        String            @default("https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=150&q=80")
-  role         String            @default("Nouveau membre")
-  location     String            @default("Lome")
-  bio          String            @default("Salut, je suis nouveau sur Skill-Trade !")
-  whatsapp     String            @default("")
-  trustBadge   String            @default("Non vérifié")
-  availability String            @default("Flexible")
-  heroOffer    String            @default("Propose un service")
-  wallet       Wallet?
-  skills       UserSkill[]
-  timeServices UserTimeService[]
-  portfolio    PortfolioItem[]
-  missions     Mission[]
-  proposals    MatchProposal[]
-  createdAt    DateTime          @default(now())
-  updatedAt    DateTime          @updatedAt
+  id             String         @id @default(cuid())
+  email          String         @unique
+  password       String
+  name           String
+  photo          String         @default("https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=150&q=80")
+  role           String         @default("Nouveau membre")
+  location       String         @default("Lome")
+  bio            String         @default("Salut, je suis nouveau sur Skill-Trade !")
+  whatsapp       String         @default("")
+  trustBadge     String         @default("Non vérifié")
+  availability   String         @default("Flexible")
+  heroOffer      String         @default("Propose un service")
+  // Plan & monetization
+  plan           String         @default("free") // "free" | "pro" | "business"
+  planExpiresAt  DateTime?
+  isAdmin        Boolean        @default(false)
+  // Preferences
+  language       String         @default("fr") // "fr" | "en"
+  theme          String         @default("dark") // "dark" | "light"
+  // Relations
+  wallet         Wallet?
+  skills         UserSkill[]
+  timeServices   UserTimeService[]
+  portfolio      PortfolioItem[]
+  missions       Mission[]
+  proposals      MatchProposal[]
+  services       Service[]
+  subscriptions  Subscription[]
+  cv             CV?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+}
+
+model CV {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // Personal info
+  fullName    String   @default("")
+  title       String   @default("")
+  summary     String   @default("")
+  phone       String   @default("")
+  email       String   @default("")
+  address     String   @default("")
+  // Skills (stored as JSON string)
+  skills      String   @default("[]")
+  // Experience (stored as JSON string)
+  experience  String   @default("[]")
+  // Education (stored as JSON string)
+  education   String   @default("[]")
+  // PDF file path (relative to /public)
+  pdfPath     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title       String
+  description String
+  category    String   @default("general")
+  price       Int      @default(0) // in FCFA, 0 = free/barter
+  isPremium   Boolean  @default(false)
+  status      String   @default("active") // "active" | "paused" | "pending"
+  image       String   @default("")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Subscription {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan        String   // "pro" | "business"
+  price       Int      // in FCFA
+  status      String   @default("active") // "active" | "cancelled" | "expired"
+  startAt     DateTime @default(now())
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Wallet {

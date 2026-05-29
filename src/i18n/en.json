@@ -1,0 +1,85 @@
+{
+  "nav": {
+    "marketplace": "Marketplace",
+    "match": "Match",
+    "wallet": "Wallet",
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "admin": "Admin",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Sign up",
+    "createService": "Create a service"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "profile": "Profile",
+    "plan": "My plan",
+    "save": "Save",
+    "saved": "Saved!",
+    "name": "Full name",
+    "bio": "Bio",
+    "whatsapp": "WhatsApp",
+    "photo": "Profile photo (URL)"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome",
+    "services": "My services",
+    "createService": "Create a service",
+    "upgradePrompt": "Upgrade to Pro or Business to create more services.",
+    "noServices": "You have no services yet.",
+    "plan": "My current plan",
+    "tokens": "Skill-Tokens",
+    "cvSection": "My CV",
+    "editCv": "Edit my CV",
+    "matches": "Matches",
+    "statusActive": "Active",
+    "statusPaused": "Paused"
+  },
+  "plans": {
+    "title": "Our plans",
+    "subtitle": "Choose the plan that suits you",
+    "free": "Free",
+    "pro": "Pro",
+    "business": "Business",
+    "month": "/month",
+    "current": "Current plan",
+    "subscribe": "Subscribe",
+    "features": {
+      "free": ["1 service", "Personal dashboard", "Visible CV", "Marketplace access", "Matchmaking"],
+      "pro": ["Up to 10 services", "Priority Pro badge", "Paid services", "Priority support", "Everything in Free"],
+      "business": ["Unlimited services", "Advanced analytics", "Premium spotlight", "Dedicated support", "Everything in Pro"]
+    }
+  },
+  "cv": {
+    "title": "My CV",
+    "upload": "Upload PDF",
+    "download": "Download",
+    "fullName": "Full name",
+    "jobTitle": "Job title",
+    "summary": "Professional summary",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "skills": "Skills",
+    "experience": "Experience",
+    "education": "Education",
+    "save": "Save",
+    "saved": "Saved!"
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "totalUsers": "Users",
+    "totalServices": "Services",
+    "totalSubscriptions": "Active subscriptions",
+    "totalRevenue": "Revenue (FCFA)",
+    "recentUsers": "Recent users",
+    "recentServices": "Recent services",
+    "planBreakdown": "Plan breakdown"
+  }
+}

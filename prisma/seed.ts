@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { getAllSeedData } from "../src/lib/site-data";
+import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
@@ -116,6 +117,27 @@ async function main() {
       ownerId: mission.ownerId,
     })),
   });
+
+  // Create admin user
+  const adminPassword = await bcrypt.hash("admin1234", 10);
+  const existingAdmin = await prisma.user.findUnique({ where: { email: "admin@skilltrade.tg" } });
+  if (!existingAdmin) {
+    await prisma.user.create({
+      data: {
+        email: "admin@skilltrade.tg",
+        password: adminPassword,
+        name: "Admin Skill-Trade",
+        isAdmin: true,
+        plan: "business",
+        role: "Administrateur",
+        bio: "Compte administrateur de la plateforme Skill-Trade.",
+        trustBadge: "Vérifié",
+        availability: "Toujours disponible",
+        heroOffer: "Gestion de la plateforme",
+      },
+    });
+    console.log("✅ Admin créé : admin@skilltrade.tg / admin1234");
+  }
 }
 
 main()

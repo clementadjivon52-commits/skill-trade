@@ -37,12 +37,14 @@ async function main() {
     createdTimeServices.map((service) => [service.name, service.id]),
   );
 
+  const defaultPassword = await bcrypt.hash("seeded-password", 10);
+
   for (const user of users) {
     await prisma.user.create({
       data: {
         id: user.id,
         email: `${user.id}@skill-trade.com`,
-        password: "seeded-password",
+        password: defaultPassword,
         name: user.name,
         photo: user.photo,
         role: user.role,

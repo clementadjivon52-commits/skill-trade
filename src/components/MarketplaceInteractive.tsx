@@ -86,6 +86,22 @@ export default function MarketplaceInteractive({
             <p className="mt-4 text-sm md:text-base leading-relaxed text-slate-300">
               Recherchez des compétences tech ou proposez des services de temps, et matchez instantanément avec la communauté locale.
             </p>
+            
+            {/* Highly Visible Action Buttons to Create Service / Manage Dashboard */}
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link
+                href="/services/create"
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-600 to-cyan-400 px-6 py-3 font-bold text-white shadow-[0_4px_14px_rgba(124,58,237,0.35)] hover:scale-[1.03] transition-all text-xs uppercase tracking-wider"
+              >
+                <span className="text-sm font-extrabold">+</span> Proposer un Service
+              </Link>
+              <Link
+                href="/dashboard"
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 font-semibold text-slate-200 hover:border-cyan-400/60 hover:bg-white/10 transition-all text-xs uppercase tracking-wider"
+              >
+                📊 Mon Tableau de Bord
+              </Link>
+            </div>
           </div>
 
           {/* Premium search bar with dynamic icons */}

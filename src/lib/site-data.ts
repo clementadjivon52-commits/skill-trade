@@ -110,17 +110,54 @@ export async function getMarketplaceOffers(type = "all") {
       : fallbackMarketplaceOffers.filter((offer) => offer.category === type);
   }
 
-  const missions = await prisma.mission.findMany({
-    where: type === "all" ? undefined : { category: type },
-    include: {
-      owner: {
-        include: userInclude,
+  const [missions, services] = await Promise.all([
+    prisma.mission.findMany({
+      where: type === "all" ? undefined : { category: type },
+      include: {
+        owner: {
+          include: userInclude,
+        },
       },
-    },
-    orderBy: { createdAt: "asc" },
-  });
+      orderBy: { createdAt: "asc" },
+    }),
+    prisma.service.findMany({
+      where: {
+        status: "active",
+        ...(type === "all" ? {} : { category: type }),
+      },
+      include: {
+        user: {
+          include: userInclude,
+        },
+      },
+      orderBy: { createdAt: "desc" },
+    }),
+  ]);
 
-  return missions.map(mapMission);
+  const mappedMissions = missions.map(mapMission);
+  const mappedServices = services.map((s) => ({
+    id: s.id,
+    title: s.title,
+    description: s.description,
+    category: s.category,
+    image: s.image || "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=400&q=80",
+    reward: s.price > 0 ? `${s.price.toLocaleString()} FCFA` : "Troc",
+    owner: mapUser(s.user),
+    typeLabel: s.isPremium
+      ? "★ Premium"
+      : s.category === "tech"
+      ? "Competences Tech"
+      : "Services de Temps",
+    isPremium: s.isPremium,
+  }));
+
+  // Combine and sort premium offers to the top
+  const combined = [...mappedServices, ...mappedMissions];
+  return combined.sort((a, b) => {
+    const aPremium = (a as any).isPremium ? 1 : 0;
+    const bPremium = (b as any).isPremium ? 1 : 0;
+    return bPremium - aPremium;
+  });
 }
 
 export async function getWalletSnapshot() {
